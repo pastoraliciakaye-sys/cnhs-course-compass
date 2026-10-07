@@ -1,352 +1,770 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CNHS Course Compass</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNHS Course Compass</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+  scroll-behavior:smooth;
+}
 
-    body {
-      margin: 0;
-      background: #f4f7ff;
-      color: #20243a;
-    }
+body{
+  margin:0;
+  background:#f4f7ff;
+  color:#20243a;
+  line-height:1.5;
+}
 
-    header {
-      background: #4f46e5;
-      color: white;
-      text-align: center;
-      padding: 35px 20px;
-    }
+header{
+  background:linear-gradient(135deg,#4f46e5,#6366f1);
+  color:white;
+  text-align:center;
+  padding:42px 20px;
+}
 
-    header h1 {
-      margin: 0 0 10px;
-      font-size: 30px;
-    }
+header h1{
+  margin:0 0 8px;
+  font-size:30px;
+}
 
-    header p {
-      margin: 0;
-      font-size: 16px;
-    }
+header p{
+  margin:0;
+  font-size:15px;
+}
 
-    .container {
-      max-width: 650px;
-      margin: 25px auto;
-      padding: 20px;
-    }
+nav{
+  background:white;
+  padding:12px 8px;
+  text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:20;
+}
 
-    .card {
-      background: white;
-      padding: 25px;
-      margin-bottom: 20px;
-      border-radius: 18px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+nav a{
+  color:#4f46e5;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:12px;
+  margin:0 5px;
+}
 
-    h2 {
-      color: #4f46e5;
-    }
+.container{
+  max-width:680px;
+  margin:25px auto;
+  padding:15px;
+}
 
-    label {
-      display: block;
-      margin: 12px 0;
-      padding: 12px;
-      background: #f1f2ff;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+.card{
+  background:white;
+  padding:24px;
+  margin-bottom:20px;
+  border-radius:18px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
 
-    input {
-      margin-right: 8px;
-    }
+h2{
+  color:#4f46e5;
+  margin-top:0;
+}
 
-    button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
-      background: #4f46e5;
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+h3{
+  color:#3730a3;
+}
 
-    button:hover {
-      background: #3730a3;
-    }
+label{
+  display:block;
+  margin:11px 0;
+  padding:13px;
+  background:#f1f2ff;
+  border-radius:11px;
+  cursor:pointer;
+}
 
-    #result {
-      display: none;
-    }
+label:hover{
+  background:#e5e7ff;
+}
 
-    .course {
-      background: #eef2ff;
-      padding: 18px;
-      border-radius: 14px;
-      margin: 12px 0;
-    }
+input{
+  margin-right:8px;
+}
 
-    .course h3 {
-      margin-top: 0;
-      color: #3730a3;
-    }
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:#4f46e5;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
 
-    .note {
-      font-size: 13px;
-      color: #666;
-      margin-top: 20px;
-    }
+button:hover{
+  background:#3730a3;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #777;
-      font-size: 13px;
-    }
-  </style>
+.secondary{
+  background:#e5e7eb;
+  color:#3730a3;
+}
+
+#result{
+  display:none;
+}
+
+.course{
+  background:#eef2ff;
+  padding:18px;
+  border-radius:14px;
+  margin:12px 0;
+}
+
+.course h3{
+  margin-top:0;
+  margin-bottom:7px;
+}
+
+.score{
+  background:#4f46e5;
+  color:white;
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.bar{
+  height:9px;
+  background:#ddd;
+  border-radius:10px;
+  margin:8px 0 12px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  background:#6366f1;
+  border-radius:10px;
+}
+
+.passion{
+  background:#f5f3ff;
+  padding:17px;
+  margin:12px 0;
+  border-radius:14px;
+}
+
+.advice{
+  background:#f8f7ff;
+  border-left:5px solid #4f46e5;
+  padding:15px;
+  margin:14px 0;
+  border-radius:8px;
+}
+
+.strand{
+  background:#eef2ff;
+  padding:16px;
+  margin:12px 0;
+  border-radius:14px;
+}
+
+.strand h3{
+  margin-top:0;
+}
+
+.info{
+  background:#f1f5f9;
+  padding:15px;
+  border-radius:12px;
+  margin-top:12px;
+}
+
+.note{
+  color:#666;
+  font-size:13px;
+}
+
+.hero{
+  text-align:center;
+}
+
+.hero button{
+  margin-top:10px;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px;
+  color:#777;
+  font-size:12px;
+}
+
+@media(max-width:500px){
+  header h1{font-size:26px}
+  nav a{display:inline-block;margin:4px}
+  .card{padding:20px}
+}
+</style>
 </head>
 
 <body>
 
-<header>
+<header id="home">
   <h1>🎓 CNHS Course Compass</h1>
-  <p>Your guide to exploring possible college courses</p>
+  <p>Your Guide to Exploring Possible College Courses</p>
 </header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#quiz">Finder</a>
+  <a href="#passion">Passion</a>
+  <a href="#courses">Courses</a>
+  <a href="#advice">Advice</a>
+  <a href="#about">About</a>
+</nav>
 
 <div class="container">
 
-  <div class="card">
-    <h2>Welcome!</h2>
+<!-- HOME -->
+<div class="card hero">
+  <h2>👋 Welcome!</h2>
 
-    <p>
-      This website is designed to help Senior High School students
-      explore college courses based on their interests and strengths.
-    </p>
+  <p>
+    Choosing a college course can be challenging.
+    CNHS Course Compass helps Senior High School students
+    explore possible courses based on their interests,
+    strengths, passions, and preferences.
+  </p>
 
-    <p>
-      Answer the questions below and discover some courses
-      that may match your interests.
-    </p>
-  </div>
+  <p>
+    Answer the questions below and discover possible
+    academic and career paths that may match you.
+  </p>
 
-  <div class="card">
+  <a href="#quiz">
+    <button>🧭 Start Course Finder</button>
+  </a>
+</div>
 
-    <h2>📝 Course Finder Quiz</h2>
 
-    <p><b>1. What type of activity do you enjoy most?</b></p>
+<!-- QUIZ -->
+<div class="card" id="quiz">
 
-    <label>
-      <input type="radio" name="q1" value="tech">
-      Using computers and technology
-    </label>
+<h2>📝 Course Finder Quiz</h2>
 
-    <label>
-      <input type="radio" name="q1" value="health">
-      Helping and caring for people
-    </label>
+<p>
+Answer honestly. There are no right or wrong answers.
+</p>
 
-    <label>
-      <input type="radio" name="q1" value="business">
-      Selling, organizing, or managing things
-    </label>
+<p><b>1. What activity do you enjoy most?</b></p>
 
-    <label>
-      <input type="radio" name="q1" value="creative">
-      Drawing, designing, or creating things
-    </label>
+<label><input type="radio" name="q1" value="tech"> 💻 Using computers and technology</label>
+<label><input type="radio" name="q1" value="health"> ❤️ Helping and caring for people</label>
+<label><input type="radio" name="q1" value="business"> 💼 Selling, organizing, or managing</label>
+<label><input type="radio" name="q1" value="creative"> 🎨 Drawing, designing, filming, or creating</label>
 
-    <p><b>2. Which subject interests you more?</b></p>
+<p><b>2. Which subject interests you most?</b></p>
 
-    <label>
-      <input type="radio" name="q2" value="tech">
-      ICT / Computer
-    </label>
+<label><input type="radio" name="q2" value="tech"> 💻 ICT / Computer</label>
+<label><input type="radio" name="q2" value="health"> 🔬 Science / Biology</label>
+<label><input type="radio" name="q2" value="business"> 📊 Mathematics / Business</label>
+<label><input type="radio" name="q2" value="creative"> 🎬 Arts / Media</label>
 
-    <label>
-      <input type="radio" name="q2" value="health">
-      Science / Biology
-    </label>
+<p><b>3. What strength describes you best?</b></p>
 
-    <label>
-      <input type="radio" name="q2" value="business">
-      Mathematics / Business
-    </label>
+<label><input type="radio" name="q3" value="tech"> 🧩 Problem solving</label>
+<label><input type="radio" name="q3" value="health"> 💗 Communication and empathy</label>
+<label><input type="radio" name="q3" value="business"> 👑 Leadership and organization</label>
+<label><input type="radio" name="q3" value="creative"> ✨ Creativity</label>
 
-    <label>
-      <input type="radio" name="q2" value="creative">
-      Arts / Media
-    </label>
+<p><b>4. What type of work sounds interesting?</b></p>
 
-    <p><b>3. What strength describes you best?</b></p>
+<label><input type="radio" name="q4" value="tech"> 🖥️ Working with technology</label>
+<label><input type="radio" name="q4" value="health"> 🩺 Working with people</label>
+<label><input type="radio" name="q4" value="business"> 📈 Managing projects or businesses</label>
+<label><input type="radio" name="q4" value="creative"> 🎥 Creating videos, designs, or media</label>
 
-    <label>
-      <input type="radio" name="q3" value="tech">
-      Problem solving
-    </label>
+<p><b>5. What are you most passionate about?</b></p>
 
-    <label>
-      <input type="radio" name="q3" value="health">
-      Communication and empathy
-    </label>
+<label><input type="radio" name="q5" value="tech"> 🚀 Technology and discovering how things work</label>
+<label><input type="radio" name="q5" value="health"> 🤝 Helping and understanding others</label>
+<label><input type="radio" name="q5" value="business"> 💡 Building ideas and opportunities</label>
+<label><input type="radio" name="q5" value="creative"> 🎨 Art, filmmaking, music, writing, or creativity</label>
 
-    <label>
-      <input type="radio" name="q3" value="business">
-      Leadership and organization
-    </label>
+<p><b>6. What kind of achievement would make you happiest?</b></p>
 
-    <label>
-      <input type="radio" name="q3" value="creative">
-      Creativity
-    </label>
+<label><input type="radio" name="q6" value="tech"> 🖥️ Creating something using technology</label>
+<label><input type="radio" name="q6" value="health"> ❤️ Making a positive difference in someone's life</label>
+<label><input type="radio" name="q6" value="business"> 💼 Building or leading something successful</label>
+<label><input type="radio" name="q6" value="creative"> 🎬 Creating something people can see and appreciate</label>
 
-    <br>
-
-    <button onclick="getResult()">See My Possible Courses</button>
-
-  </div>
-
-  <div class="card" id="result">
-
-    <h2>🎯 Your Possible Courses</h2>
-
-    <div id="courseResults"></div>
-
-    <p class="note">
-      Note: These suggestions are for educational guidance only.
-      They do not determine which college course a student should take.
-    </p>
-
-  </div>
+<button onclick="getResult()">🎯 Show My Course Matches</button>
 
 </div>
 
+
+<!-- RESULTS -->
+<div class="card" id="result">
+
+<h2>🎯 Your Possible Courses</h2>
+
+<p id="resultIntro"></p>
+
+<div id="courseResults"></div>
+
+<div class="info">
+  <b>Remember:</b> A recommendation is only a starting point.
+  Your final college decision should also consider your goals,
+  interests, abilities, finances, school options, and personal circumstances.
+</div>
+
+<button class="secondary" onclick="retakeQuiz()">🔄 Retake Quiz</button>
+
+</div>
+
+
+<!-- PASSION -->
+<div class="card" id="passion">
+
+<h2>❤️ Explore Your Passion</h2>
+
+<p>
+Passion is one factor that can help students understand
+what kind of academic or career environment they may enjoy.
+</p>
+
+<div class="passion">
+<h3>🎨 Creative</h3>
+<p>
+You may enjoy art, filmmaking, photography, editing,
+design, music, writing, or creating original ideas.
+</p>
+</div>
+
+<div class="passion">
+<h3>💻 Technology</h3>
+<p>
+You may enjoy computers, coding, digital tools,
+problem-solving, and learning how technology works.
+</p>
+</div>
+
+<div class="passion">
+<h3>❤️ Helping Others</h3>
+<p>
+You may find fulfillment in supporting, teaching,
+communicating with, or caring for other people.
+</p>
+</div>
+
+<div class="passion">
+<h3>💼 Business & Leadership</h3>
+<p>
+You may enjoy planning, organizing, managing,
+communicating, selling, or developing business ideas.
+</p>
+</div>
+
+<div class="passion">
+<h3>🔬 Discovery & Science</h3>
+<p>
+You may enjoy asking questions, investigating problems,
+understanding living things, and learning how the world works.
+</p>
+</div>
+
+</div>
+
+
+<!-- COURSES -->
+<div class="card" id="courses">
+
+<h2>📚 Courses & SHS Strands</h2>
+
+<p>
+Your SHS strand does not permanently decide your college course.
+It can simply be one of the factors you consider when exploring options.
+</p>
+
+<div class="strand">
+<h3>🔬 STEM</h3>
+<p>
+Possible fields include Engineering, Information Technology,
+Computer Science, Nursing, Biology, and other science-related programs.
+</p>
+</div>
+
+<div class="strand">
+<h3>👥 HUMSS</h3>
+<p>
+Possible fields include Psychology, Education, Communication,
+Political Science, Sociology, Social Work, and other people-centered programs.
+</p>
+</div>
+
+<div class="strand">
+<h3>💼 ABM</h3>
+<p>
+Possible fields include Accountancy, Business Administration,
+Marketing, Entrepreneurship, Management, and Finance.
+</p>
+</div>
+
+<div class="strand">
+<h3>🎨 Arts & Design</h3>
+<p>
+Possible fields include Fine Arts, Multimedia Arts,
+Digital Media, Graphic Design, Animation, and other creative programs.
+</p>
+</div>
+
+<div class="strand">
+<h3>🛠️ TVL</h3>
+<p>
+Possible fields may include Information Technology,
+Hospitality Management, Culinary Arts, Electronics,
+Automotive, and other technical or skills-based programs.
+</p>
+</div>
+
+<div class="strand">
+<h3>🌱 GAS</h3>
+<p>
+GAS can provide flexibility for students who are still
+exploring different academic and career interests.
+</p>
+</div>
+
+</div>
+
+
+<!-- ADVICE -->
+<div class="card" id="advice">
+
+<h2>💡 College Advice</h2>
+
+<div class="advice">
+<h3>1. Know Yourself</h3>
+<p>
+Consider your interests, strengths, values, personality,
+and activities that make you feel motivated.
+</p>
+</div>
+
+<div class="advice">
+<h3>2. Do Not Choose Because of Pressure</h3>
+<p>
+Your friends or other people may influence you,
+but your decision should also reflect your own goals and interests.
+</p>
+</div>
+
+<div class="advice">
+<h3>3. Research Before Choosing</h3>
+<p>
+Check the subjects, admission requirements, possible careers,
+costs, and schools offering the course.
+</p>
+</div>
+
+<div class="advice">
+<h3>4. Think About Your Future</h3>
+<p>
+Ask yourself what type of work, environment, and lifestyle
+you may want in the future.
+</p>
+</div>
+
+<div class="advice">
+<h3>5. Talk to People</h3>
+<p>
+Ask teachers, parents, counselors, college students,
+graduates, or professionals about their experiences.
+</p>
+</div>
+
+<div class="advice">
+<h3>6. It Is Okay Not to Know Yet</h3>
+<p>
+You do not need to have your entire future figured out.
+Exploring different possibilities is already progress.
+</p>
+</div>
+
+<div class="advice">
+<h3>7. Passion and Practicality Can Coexist</h3>
+<p>
+You can consider both what you enjoy and what opportunities
+may be available. Finding a balance can help you make an informed choice.
+</p>
+</div>
+
+</div>
+
+
+<!-- DECISION GUIDE -->
+<div class="card">
+
+<h2>🧭 Before Choosing a Course</h2>
+
+<p>Ask yourself these questions:</p>
+
+<div class="info">
+<b>❤️ Do I enjoy this field?</b><br>
+Would I still be interested in learning about it over time?
+</div>
+
+<div class="info">
+<b>🧠 Am I willing to learn its difficult parts?</b><br>
+Every course has challenging subjects.
+</div>
+
+<div class="info">
+<b>🎯 Does it connect with my goals?</b><br>
+Think about the kind of future and work you want to pursue.
+</div>
+
+<div class="info">
+<b>💰 Have I researched the practical side?</b><br>
+Consider tuition, transportation, materials, and other possible expenses.
+</div>
+
+<div class="info">
+<b>📖 Have I researched the actual course?</b><br>
+Look beyond the course title and learn what students actually study.
+</div>
+
+</div>
+
+
+<!-- ABOUT -->
+<div class="card" id="about">
+
+<h2>📖 About the Project</h2>
+
+<p>
+<b>CNHS Course Compass</b> is a Senior High School research
+prototype designed to help students explore possible college
+courses based on interests, strengths, passions, and preferences.
+</p>
+
+<h3>🎓 Purpose</h3>
+
+<p>
+The website provides an interactive way for students to begin
+exploring possible academic and career paths.
+</p>
+
+<h3>📊 Research Prototype</h3>
+
+<p>
+This website was developed as part of an Individual
+Practical Research 2 project for Senior High School.
+</p>
+
+<h3>⚠️ Important Note</h3>
+
+<p class="note">
+The Course Finder is not a professional psychological,
+career, or aptitude assessment. Its results are educational
+suggestions only and should not be treated as a final decision.
+</p>
+
+</div>
+
+</div>
+
+
 <footer>
-  CNHS Course Compass • Senior High School Research Prototype
+CNHS Course Compass • Senior High School Research Prototype
+<br>
+Helping students explore. Guiding future possibilities. 🎓
 </footer>
+
 
 <script>
 
-function getResult() {
+function getResult(){
 
-  let answers = document.querySelectorAll('input[type="radio"]:checked');
+  let answers=document.querySelectorAll(
+    'input[type="radio"]:checked'
+  );
 
-  if (answers.length < 3) {
-    alert("Please answer all three questions first.");
+  if(answers.length<6){
+    alert("Please answer all six questions first.");
     return;
   }
 
-  let scores = {
-    tech: 0,
-    health: 0,
-    business: 0,
-    creative: 0
+  let scores={
+    tech:0,
+    health:0,
+    business:0,
+    creative:0
   };
 
-  answers.forEach(function(answer) {
+  answers.forEach(function(answer){
     scores[answer.value]++;
   });
 
-  let highest = Math.max(
-    scores.tech,
-    scores.health,
-    scores.business,
-    scores.creative
-  );
+  let sorted=Object.entries(scores)
+    .sort(function(a,b){
+      return b[1]-a[1];
+    });
 
-  let result = "";
+  let first=sorted[0];
+  let second=sorted[1];
 
-  if (scores.tech === highest) {
-    result += `
+  let result="";
+
+  let courseData={
+
+    tech:{
+      name:"Technology & Computing",
+      courses:[
+        ["💻 BS Information Technology",
+        "A possible match for students interested in computers, software, digital systems, and technology."],
+
+        ["🖥️ BS Computer Science",
+        "A possible match for students interested in programming, algorithms, logical thinking, and computer systems."],
+
+        ["⚙️ Computer Engineering",
+        "A possible match for students interested in computers, electronics, hardware, and problem-solving."]
+      ]
+    },
+
+    health:{
+      name:"Health & People",
+      courses:[
+        ["🩺 BS Nursing",
+        "A possible match for students interested in healthcare, science, patient care, and helping others."],
+
+        ["🧠 BS Psychology",
+        "A possible match for students interested in human behavior, communication, and understanding people."],
+
+        ["📚 Education",
+        "A possible match for students who enjoy teaching, communicating ideas, and helping others learn."]
+      ]
+    },
+
+    business:{
+      name:"Business & Leadership",
+      courses:[
+        ["💼 BS Business Administration",
+        "A possible match for students interested in management, organization, leadership, and business operations."],
+
+        ["📈 BS Marketing Management",
+        "A possible match for students interested in communication, promotion, branding, sales, and strategy."],
+
+        ["🚀 BS Entrepreneurship",
+        "A possible match for students who enjoy developing ideas, planning projects, and creating opportunities."]
+      ]
+    },
+
+    creative:{
+      name:"Creative & Media",
+      courses:[
+        ["🎨 Bachelor of Fine Arts",
+        "A possible match for students interested in visual art, drawing, painting, and creative expression."],
+
+        ["🎬 Multimedia Arts / Digital Media",
+        "A possible match for students interested in filmmaking, photography, video editing, animation, and digital design."],
+
+        ["🏛️ Architecture",
+        "A possible match for students interested in design, planning, structures, creativity, and visual thinking."]
+      ]
+    }
+
+  };
+
+  let firstPercent=Math.round((first[1]/6)*100);
+  let secondPercent=Math.round((second[1]/6)*100);
+
+  result+=`
+    <div class="course">
+      <span class="score">${firstPercent}% MATCH</span>
+      <h3>🌟 ${courseData[first[0]].name}</h3>
+      <p>
+        Your answers show a stronger interest in this area.
+        Here are some courses you may want to explore:
+      </p>
+    </div>
+  `;
+
+  courseData[first[0]].courses.forEach(function(course){
+
+    result+=`
       <div class="course">
-        <h3>💻 BS Information Technology</h3>
-        <p>
-          This may suit students interested in computers,
-          technology, and solving technical problems.
-        </p>
+        <h3>${course[0]}</h3>
+        <p>${course[1]}</p>
       </div>
+    `;
 
+  });
+
+  if(second[1]>0){
+
+    result+=`
       <div class="course">
-        <h3>🖥️ BS Computer Science</h3>
+        <span class="score">${secondPercent}% MATCH</span>
+        <h3>✨ Another Area to Explore: ${courseData[second[0]].name}</h3>
         <p>
-          This may suit students interested in programming,
-          logical thinking, and computer systems.
+          You also showed interest in this area, so it may be worth
+          researching alongside your top match.
         </p>
       </div>
     `;
+
+    courseData[second[0]].courses.slice(0,2).forEach(function(course){
+
+      result+=`
+        <div class="course">
+          <h3>${course[0]}</h3>
+          <p>${course[1]}</p>
+        </div>
+      `;
+
+    });
   }
 
-  if (scores.health === highest) {
-    result += `
-      <div class="course">
-        <h3>🩺 BS Nursing</h3>
-        <p>
-          This may suit students interested in healthcare,
-          science, and helping people.
-        </p>
-      </div>
+  document.getElementById("courseResults").innerHTML=result;
 
-      <div class="course">
-        <h3>🧠 BS Psychology</h3>
-        <p>
-          This may suit students interested in human behavior,
-          communication, and helping others.
-        </p>
-      </div>
-    `;
-  }
+  document.getElementById("resultIntro").innerHTML=
+    "Based on your answers, these are the fields that showed the strongest match. Use them as a starting point for further research.";
 
-  if (scores.business === highest) {
-    result += `
-      <div class="course">
-        <h3>💼 BS Business Administration</h3>
-        <p>
-          This may suit students interested in management,
-          business, and organization.
-        </p>
-      </div>
+  document.getElementById("result").style.display="block";
 
-      <div class="course">
-        <h3>📈 BS Marketing Management</h3>
-        <p>
-          This may suit students interested in communication,
-          promotion, and business strategies.
-        </p>
-      </div>
-    `;
-  }
+  setTimeout(function(){
 
-  if (scores.creative === highest) {
-    result += `
-      <div class="course">
-        <h3>🎨 Bachelor of Fine Arts</h3>
-        <p>
-          This may suit students who enjoy visual creativity,
-          art, and design.
-        </p>
-      </div>
+    document.getElementById("result").scrollIntoView({
+      behavior:"smooth"
+    });
 
-      <div class="course">
-        <h3>🎬 Digital Media / Multimedia</h3>
-        <p>
-          This may suit students interested in digital design,
-          media, and creative technology.
-        </p>
-      </div>
-    `;
-  }
+  },100);
+}
 
-  document.getElementById("courseResults").innerHTML = result;
-  document.getElementById("result").style.display = "block";
 
-  window.scrollTo({
-    top: document.getElementById("result").offsetTop,
-    behavior: "smooth"
+function retakeQuiz(){
+
+  document.querySelectorAll(
+    'input[type="radio"]'
+  ).forEach(function(input){
+    input.checked=false;
+  });
+
+  document.getElementById("result").style.display="none";
+
+  document.getElementById("quiz").scrollIntoView({
+    behavior:"smooth"
   });
 }
 
