@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNHS Course Compass</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7ff;
+      color: #20243a;
+    }
+
+    header {
+      background: #4f46e5;
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 25px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #4f46e5;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0;
+      padding: 12px;
+      background: #f1f2ff;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    input {
+      margin-right: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #4f46e5;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #3730a3;
+    }
+
+    #result {
+      display: none;
+    }
+
+    .course {
+      background: #eef2ff;
+      padding: 18px;
+      border-radius: 14px;
+      margin: 12px 0;
+    }
+
+    .course h3 {
+      margin-top: 0;
+      color: #3730a3;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎓 CNHS Course Compass</h1>
+  <p>Your guide to exploring possible college courses</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Welcome!</h2>
+
+    <p>
+      This website is designed to help Senior High School students
+      explore college courses based on their interests and strengths.
+    </p>
+
+    <p>
+      Answer the questions below and discover some courses
+      that may match your interests.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <h2>📝 Course Finder Quiz</h2>
+
+    <p><b>1. What type of activity do you enjoy most?</b></p>
+
+    <label>
+      <input type="radio" name="q1" value="tech">
+      Using computers and technology
+    </label>
+
+    <label>
+      <input type="radio" name="q1" value="health">
+      Helping and caring for people
+    </label>
+
+    <label>
+      <input type="radio" name="q1" value="business">
+      Selling, organizing, or managing things
+    </label>
+
+    <label>
+      <input type="radio" name="q1" value="creative">
+      Drawing, designing, or creating things
+    </label>
+
+    <p><b>2. Which subject interests you more?</b></p>
+
+    <label>
+      <input type="radio" name="q2" value="tech">
+      ICT / Computer
+    </label>
+
+    <label>
+      <input type="radio" name="q2" value="health">
+      Science / Biology
+    </label>
+
+    <label>
+      <input type="radio" name="q2" value="business">
+      Mathematics / Business
+    </label>
+
+    <label>
+      <input type="radio" name="q2" value="creative">
+      Arts / Media
+    </label>
+
+    <p><b>3. What strength describes you best?</b></p>
+
+    <label>
+      <input type="radio" name="q3" value="tech">
+      Problem solving
+    </label>
+
+    <label>
+      <input type="radio" name="q3" value="health">
+      Communication and empathy
+    </label>
+
+    <label>
+      <input type="radio" name="q3" value="business">
+      Leadership and organization
+    </label>
+
+    <label>
+      <input type="radio" name="q3" value="creative">
+      Creativity
+    </label>
+
+    <br>
+
+    <button onclick="getResult()">See My Possible Courses</button>
+
+  </div>
+
+  <div class="card" id="result">
+
+    <h2>🎯 Your Possible Courses</h2>
+
+    <div id="courseResults"></div>
+
+    <p class="note">
+      Note: These suggestions are for educational guidance only.
+      They do not determine which college course a student should take.
+    </p>
+
+  </div>
+
+</div>
+
+<footer>
+  CNHS Course Compass • Senior High School Research Prototype
+</footer>
+
+<script>
+
+function getResult() {
+
+  let answers = document.querySelectorAll('input[type="radio"]:checked');
+
+  if (answers.length < 3) {
+    alert("Please answer all three questions first.");
+    return;
+  }
+
+  let scores = {
+    tech: 0,
+    health: 0,
+    business: 0,
+    creative: 0
+  };
+
+  answers.forEach(function(answer) {
+    scores[answer.value]++;
+  });
+
+  let highest = Math.max(
+    scores.tech,
+    scores.health,
+    scores.business,
+    scores.creative
+  );
+
+  let result = "";
+
+  if (scores.tech === highest) {
+    result += `
+      <div class="course">
+        <h3>💻 BS Information Technology</h3>
+        <p>
+          This may suit students interested in computers,
+          technology, and solving technical problems.
+        </p>
+      </div>
+
+      <div class="course">
+        <h3>🖥️ BS Computer Science</h3>
+        <p>
+          This may suit students interested in programming,
+          logical thinking, and computer systems.
+        </p>
+      </div>
+    `;
+  }
+
+  if (scores.health === highest) {
+    result += `
+      <div class="course">
+        <h3>🩺 BS Nursing</h3>
+        <p>
+          This may suit students interested in healthcare,
+          science, and helping people.
+        </p>
+      </div>
+
+      <div class="course">
+        <h3>🧠 BS Psychology</h3>
+        <p>
+          This may suit students interested in human behavior,
+          communication, and helping others.
+        </p>
+      </div>
+    `;
+  }
+
+  if (scores.business === highest) {
+    result += `
+      <div class="course">
+        <h3>💼 BS Business Administration</h3>
+        <p>
+          This may suit students interested in management,
+          business, and organization.
+        </p>
+      </div>
+
+      <div class="course">
+        <h3>📈 BS Marketing Management</h3>
+        <p>
+          This may suit students interested in communication,
+          promotion, and business strategies.
+        </p>
+      </div>
+    `;
+  }
+
+  if (scores.creative === highest) {
+    result += `
+      <div class="course">
+        <h3>🎨 Bachelor of Fine Arts</h3>
+        <p>
+          This may suit students who enjoy visual creativity,
+          art, and design.
+        </p>
+      </div>
+
+      <div class="course">
+        <h3>🎬 Digital Media / Multimedia</h3>
+        <p>
+          This may suit students interested in digital design,
+          media, and creative technology.
+        </p>
+      </div>
+    `;
+  }
+
+  document.getElementById("courseResults").innerHTML = result;
+  document.getElementById("result").style.display = "block";
+
+  window.scrollTo({
+    top: document.getElementById("result").offsetTop,
+    behavior: "smooth"
+  });
+}
+
+</script>
+
+</body>
+  </html>
